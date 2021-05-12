@@ -1,4 +1,4 @@
-# windows-pip-deps
-Prebuilt Windows PIP dependencies for ODM
+# windows-deps
+Prebuilt Windows dependencies for ODM
 
 Mirrored from https://www.lfd.uci.edu/~gohlke/pythonlibs/
