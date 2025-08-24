@@ -1,0 +1,31 @@
+name: Build Python Wheels
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  python-wheels:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12.10'
+    - name: Install dependencies
+      run: pip3 install wheel --break-system-packages
+    - name: Build wheels
+      run: python3 get_deps.py
+    - name: Upload wheels
+      uses: actions/upload-artifact@v4
+      with:
+        name: python_wheels
+        path: |
+          ./*.whl
+          ./*.zip
