@@ -3,13 +3,12 @@ import re
 import shutil
 import urllib.request
 from zipfile import ZipFile
-from wheel.cli.unpack import unpack
-from wheel.cli.pack import pack
+from wheel.wheelfile import WheelFile
 
 gdal_wheel_url = "https://github.com/cgohlke/geospatial-wheels/releases/download/v2025.7.4/gdal-3.11.1-cp312-cp312-win_amd64.whl"
 fiona_wheel_url = "https://github.com/cgohlke/geospatial-wheels/releases/download/v2025.7.4/fiona-1.10.1-cp312-cp312-win_amd64.whl"
 rasterio_wheel_url = "https://github.com/cgohlke/geospatial-wheels/releases/download/v2025.7.4/rasterio-1.4.3-cp312-cp312-win_amd64.whl"
-python_zip = "https://www.python.org/ftp/python/3.12.10/python-3.12.10-embed-amd64.zip"
+python_zip = "https://www.python.org/ftp/python/3.12.9/python-3.12.9-embed-amd64.zip"
 
 def main():
     # Fiona and rasterio are easy, just download the wheels
@@ -27,7 +26,8 @@ def main():
 
     # Unpack the wheel into a directory
     gdal_wheel_dir = f"gdal-{gdal_version}"
-    unpack(gdal_wheel)
+    with ZipFile(gdal_wheel, 'r') as zip:
+        zip.extractall(gdal_wheel_dir)
     os.remove(gdal_wheel)
 
     # Read the names of include files we need to add to the whl
@@ -53,7 +53,7 @@ def main():
                 os.rename(filename, os.path.join(include_dir, filename.split("/")[-1]))
 
         # Special handling for gdal_version.h
-        filename = os.path.join(gdal_wheel_dir, "gcore", "gdal_version.h.in")
+        filename = f"{gdal_wheel_dir}/gcore/gdal_version.h.in"
         zip.extract(filename, ".")
         os.rename(filename, os.path.join(include_dir, "gdal_version.h"))
 
@@ -63,7 +63,8 @@ def main():
     os.remove(gdal_src_zip)
 
     # Repackage the wheel
-    pack(gdal_wheel_dir, dest_dir=".", build_number=None)
+    with WheelFile(gdal_wheel, 'w') as wf:
+        wf.write_files(gdal_wheel_dir)
     shutil.rmtree(gdal_wheel_dir)
 
 
