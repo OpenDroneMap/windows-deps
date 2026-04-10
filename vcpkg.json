@@ -25,9 +25,10 @@
         "cgal",
         "yasm-tool",
         "metis",
+        "python3",
         "pybind11"
     ],
-    "builtin-baseline": "6ecbbbdf31cba47aafa7cf6189b1e73e10ac61f8",
+    "builtin-baseline": "2c4aa58001c2e36a2fb643a302bbd07038660735",
     "overrides": [
        { "name": "eigen3", "version": "3.4.0#5" },
        { "name": "suitesparse", "version": "5.8.0" },
@@ -54,6 +55,7 @@
        { "name": "cgal", "version": "6.0.1" },
        { "name": "yasm-tool", "version": "2021-12-14" },
        { "name": "metis", "version": "2025-07-04" },
+       { "name": "python3", "version": "3.12.13" },
        { "name": "pybind11", "version": "3.0.0#1" }
     ]
 }

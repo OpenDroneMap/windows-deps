@@ -9,7 +9,7 @@ from wheel.cli.pack import pack
 gdal_wheel_url = "https://github.com/cgohlke/geospatial-wheels/releases/download/v2025.7.4/gdal-3.11.1-cp312-cp312-win_amd64.whl"
 fiona_wheel_url = "https://github.com/cgohlke/geospatial-wheels/releases/download/v2025.7.4/fiona-1.10.1-cp312-cp312-win_amd64.whl"
 rasterio_wheel_url = "https://github.com/cgohlke/geospatial-wheels/releases/download/v2025.7.4/rasterio-1.4.3-cp312-cp312-win_amd64.whl"
-python_zip = "https://www.python.org/ftp/python/3.12.10/python-3.12.10-embed-amd64.zip"
+python_zip = "https://www.python.org/ftp/python/3.12.13/python-3.12.13-embed-amd64.zip"
 
 def main():
     # Fiona and rasterio are easy, just download the wheels
