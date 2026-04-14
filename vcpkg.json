@@ -27,7 +27,10 @@
         "metis",
         "python3",
         "pybind11",
-        "gdal"
+        {
+            "name": "gdal",
+            "features": ["tools"]
+        }
     ],
     "builtin-baseline": "6b68ff33240209010db42256d3f5c3a3c58273fb",
     "overrides": [
