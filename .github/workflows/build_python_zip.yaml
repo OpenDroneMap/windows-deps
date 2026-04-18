@@ -1,4 +1,4 @@
-name: Build Python Wheels
+name: Build Python Zip
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
     - main
 
 jobs:
-  python-wheels:
+  python-zip:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -17,15 +17,12 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.12.10'
-    - name: Install dependencies
-      run: pip3 install wheel --break-system-packages
-    - name: Build wheels
+        python-version: '3.12.9'
+    - name: Build Python zip
       run: python3 get_deps.py
-    - name: Upload wheels
+    - name: Upload zip
       uses: actions/upload-artifact@v4
       with:
-        name: python_wheels
+        name: python_zip
         path: |
-          ./*.whl
           ./*.zip
